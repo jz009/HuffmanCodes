@@ -6,6 +6,7 @@ import java.util.HashMap;
 @SuppressWarnings({"unchecked"})
 public class HuffmanEncoder {
 
+    private int encodedLength;
     private ArrayList<Node> tree;
     private String input;
     private HashMap<Character, String> codeTable;
@@ -40,6 +41,7 @@ public class HuffmanEncoder {
         for (char c : chars) {
             s.append(codeTable.get(c));
         }
+        encodedLength = s.toString().length();
         return s.toString();
     }
 
@@ -66,6 +68,14 @@ public class HuffmanEncoder {
             }
         }
         return s.toString();
+    }
+
+    public void runTest() {
+        this.decodeString(encodeString());
+        System.out.println("Original length in bits: " + input.length() * 8);
+        System.out.println("Encoded length in bits: " + encodedLength);
+        System.out.println("Compression rate: " + (encodedLength * 1.0) / (input.length()* 8));
+
     }
 
     HashMap<Character, String> createCodeTable(Node node)
